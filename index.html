@@ -9,18 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
-    <script src = "script.js"></script>
 </head>
 <body>
-    <h1 class = "header">Speech Recognition</h1>
-    <h2 class = "subheader">Arduino with HM-10</h2>
-    <div class = "box">
-        <div id = "text"><p>Speech to Text</p></div>
-    </div>
-    <div class="container">
-        <button id = "button1" onclick = record()>Click to speak</button>
-    </div>
-
+    <section>
+        <h1 class = "header">Speech Recognition</h1>
+        <h2 class = "subheader">Arduino with HM-10</h2>
+        <div class = "box">
+            <div id= "text"><p id = paragraphText>Speech to Text</p></div>
+        </div>
+        <div class="container">
+            <button id = "button1">Click to speak</button>
+            <button id = "recording">Recording...</button>
+        </div>
+    </section>
+    <script src = "script.js"></script>
 
 </body>
 </html>
