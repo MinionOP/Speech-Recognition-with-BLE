@@ -1,3 +1,12 @@
+/*------------------------------------------------------
+Voice Recognition BLE
+ECE 5436
+Team 4
+-------------------------------------------------------*/
+
+//---------------------------SpeechRecognition---------------------------
+
+
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
@@ -17,17 +26,22 @@ recognition.onresult = function(event){
     var message = event.results[0][0].transcript;
     document.getElementById('paragraphText').innerHTML = message;
 
-    if(message.toLowerCase() === 'light on'){
-        alert("Living room light is on");
+    if(characteristicCache){
+        if(message.toLowerCase() === 'light on'){
+            characteristicCache.writeValue(new TextEncoder().encode('1'));   
+        }
+        else if(message.toLowerCase() === 'light off'){
+            characteristicCache.writeValue(new TextEncoder().encode('0'));   
+        }
+        else if(message.toLowerCase() === 'open garage'){
+            alert('Opening garage');
+        }
+        else if(message.toLowerCase() === 'close garage'){
+            alert('Closing garage');
+        }
     }
-    else if(message.toLowerCase() === 'light off'){
-        alert('Living room light is off');
-    }
-    else if(message.toLowerCase() === 'open garage'){
-        alert('Opening garage');
-    }
-    else if(message.toLowerCase() === 'close garage'){
-        alert('Closing garage');
+    else{
+        console.log('No characteristic');
     }
 };
 
@@ -51,12 +65,11 @@ document.querySelector('#button1').addEventListener('click', function(){
 });
 
 
-
-//-----------------Bluetooth------------------------
+//---------------------------Bluetooth---------------------------
 let characteristicCache = null;
 let deviceCache = null;
 
-function connect(){
+function connectDevice(){
     navigator.bluetooth.requestDevice({
         filters:
         [
@@ -79,25 +92,19 @@ function connect(){
     .then(characteristic =>{
         console.log('Found characteristic');
         characteristicCache  = characteristic;
+        document.getElementById('connecting').style.display = "none";
+        document.getElementById('disconnect').style.display = "block";
     })
     .catch(error =>{
         console.log('Request device error: ' + error);
+        document.getElementById('connect').style.display = "block";
+        document.getElementById('connecting').style.display = "none";
     })
     
 }
 
-
+/*
 document.querySelector('#connectDevice').addEventListener('click', function(event){
-    event.stopPropagation();
-    event.preventDefault();
-
-    if(navigator.bluetooth){
-        console.log('Web Bluetooth is available');
-        connect();
-    }
-    else{
-        console.log('Web Bluetooth is available');
-    }
 });
 
 document.querySelector('#disconnectDevice').addEventListener('click', function(event){
@@ -131,3 +138,34 @@ document.querySelector('#offTest').addEventListener('click', function(event){
         console.log('No characteristic');
     }
 });
+*/
+document.querySelector('#connect').addEventListener('click', function(event){
+    if(navigator.bluetooth){
+        console.log('Web Bluetooth is available');
+        document.getElementById('connect').style.display = "none";
+        document.getElementById('connecting').style.display = "block";
+        connectDevice();
+    }
+    else{
+        console.log('Web Bluetooth is available');
+    }
+});
+
+document.querySelector('#disconnect').addEventListener('click', function(event){
+    if(deviceCache){
+        if(deviceCache.gatt.connected){
+            deviceCache.gatt.disconnect();
+            console.log(deviceCache.name + ' disconnected');
+        }
+        else{
+            console.log(deviceCache.name +' is already disconnected');
+        }
+    }
+    characteristicCache = null;
+    deviceCache = null;
+    document.getElementById('disconnect').style.display = "none";
+    document.getElementById('connect').style.display = "block";
+});
+
+
+
