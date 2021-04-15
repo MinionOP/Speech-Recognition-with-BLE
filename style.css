@@ -6,7 +6,7 @@
 }
 
 
-.header, .subheader{
+.header, #connect, #connecting, #disconnect{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -20,8 +20,13 @@
     margin-top: 3em;
     font-size: 3em;
 }
-.subheader{
+
+#connect, #connecting, #disconnect{
     font-size: 1em;
+}
+
+#connecting, #disconnect{
+    display:none;
 }
 
 .box{
@@ -100,7 +105,7 @@
     }
 }
 
-
+/*
 #connectDevice{
    background: white;
 }
@@ -137,3 +142,4 @@
      border: blue;
      border-radius: 25px;
  }
+ */
