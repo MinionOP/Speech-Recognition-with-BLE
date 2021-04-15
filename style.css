@@ -100,3 +100,40 @@
     }
 }
 
+
+#connectDevice{
+   background: white;
+}
+
+#connectDevice:hover{
+    background-color: blue;
+}
+#connectDevice:active{
+    border: blue;
+    border-radius: 25px;
+}
+
+
+#disconnectDevice{
+    background: white;
+ }
+ 
+ #disconnectDevice:hover{
+     background-color: blue;
+ }
+ #disconnectDevice:active{
+     border: blue;
+     border-radius: 25px;
+ }
+
+ #onTest, #offTest{
+    background: white;
+ }
+ 
+ #onTest:hover, #offTest:hover{
+     background-color: blue;
+ }
+ #onTest:active, #offTestt:active{
+     border: blue;
+     border-radius: 25px;
+ }
