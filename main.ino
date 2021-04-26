@@ -1,17 +1,15 @@
 #include <SoftwareSerial.h>
-
-
-
+#include <Servo.h>
 SoftwareSerial HM10(10, 11);  //[RX, TX]
 
-
+Servo myServo;
 char msg;
 
 
 void setup()
 {
     Serial.begin(9600);
-    //testAllBaudRates();
+    myServo.attach(3);
     pinMode(8, OUTPUT);
     HM10.begin(9600);
 }
@@ -25,6 +23,12 @@ void loop(){
       }
       else if(msg == '0'){
         digitalWrite(8,LOW);
+      }
+      else if(msg == '2'){
+        myServo.write(180);
+      }
+      else if(msg == '3'){
+        myServo.write(0);
       }
     }
     if (Serial.available()) {
