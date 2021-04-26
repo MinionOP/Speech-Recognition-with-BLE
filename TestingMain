@@ -7,7 +7,7 @@ SoftwareSerial HM10(10, 11);  //[RX, TX]
 
 char msg;
 
-void TaskBlink1( void *pvParameters );
+void TaskLight( void *pvParameters );
 void setup()
 {
     Serial.begin(9600);
@@ -43,7 +43,7 @@ void loop(){
 
 
 
-void TaskBlink1(void *pvParameters)  {
+void TaskLight(void *pvParameters)  {
   pinMode(8, OUTPUT);
   while(1)
   {
