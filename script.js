@@ -38,6 +38,12 @@ recognition.onresult = function(event){
         else if(message.toLowerCase() === 'close garage'){
             characteristicCache.writeValue(new TextEncoder().encode('3'));   
         }
+        else if(message.toLowerCase() === 'alarm on' || message.toLowerCase() === 'turn alarm on'){
+            characteristicCache.writeValue(new TextEncoder().encode('4'));   
+        }
+        else if(message.toLowerCase() === 'alarm off' || message.toLowerCase() === 'turn alarm off'){
+            characteristicCache.writeValue(new TextEncoder().encode('5'));   
+        }
     }
     else{
         console.log('No characteristic');
