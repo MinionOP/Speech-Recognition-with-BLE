@@ -3,7 +3,6 @@ Voice Recognition BLE
 ECE 5436
 Team 4
 -------------------------------------------------------*/
-
 //---------------------------SpeechRecognition---------------------------
 
 
@@ -27,17 +26,17 @@ recognition.onresult = function(event){
     document.getElementById('paragraphText').innerHTML = message;
 
     if(characteristicCache){
-        if(message.toLowerCase() === 'light on'){
+        if(message.toLowerCase() === 'light on' || message.toLowerCase() === 'turn light on'){
             characteristicCache.writeValue(new TextEncoder().encode('1'));   
         }
-        else if(message.toLowerCase() === 'light off'){
+        else if(message.toLowerCase() === 'light off'|| message.toLowerCase() === 'turn light off'){
             characteristicCache.writeValue(new TextEncoder().encode('0'));   
         }
         else if(message.toLowerCase() === 'open garage'){
-            alert('Opening garage');
+            characteristicCache.writeValue(new TextEncoder().encode('2'));   
         }
         else if(message.toLowerCase() === 'close garage'){
-            alert('Closing garage');
+            characteristicCache.writeValue(new TextEncoder().encode('3'));   
         }
     }
     else{
@@ -103,42 +102,6 @@ function connectDevice(){
     
 }
 
-/*
-document.querySelector('#connectDevice').addEventListener('click', function(event){
-});
-
-document.querySelector('#disconnectDevice').addEventListener('click', function(event){
-    if(deviceCache){
-        if(deviceCache.gatt.connected){
-            deviceCache.gatt.disconnect();
-            console.log(deviceCache.name + ' disconnected');
-        }
-        else{
-            console.log(deviceCache.name +' is already disconnected');
-        }
-    }
-    characteristicCache = null;
-    deviceCache = null;
-});
-
-document.querySelector('#onTest').addEventListener('click', function(event){
-    if(characteristicCache){
-        characteristicCache.writeValue(new TextEncoder().encode('1'));   
-    }
-    else{
-        console.log('No characteristic');
-    }
-});
-
-document.querySelector('#offTest').addEventListener('click', function(event){
-    if(characteristicCache){
-        characteristicCache.writeValue(new TextEncoder().encode('0'));   
-    }
-    else{
-        console.log('No characteristic');
-    }
-});
-*/
 document.querySelector('#connect').addEventListener('click', function(event){
     if(navigator.bluetooth){
         console.log('Web Bluetooth is available');
