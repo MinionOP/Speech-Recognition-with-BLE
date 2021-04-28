@@ -32,7 +32,6 @@ void setup()
     
 }
 void loop(){
-
 }
 
 
@@ -53,6 +52,7 @@ void TaskAction(void *pvParameters){
   (void) pvParameters;
    myServo.attach(3);
    pinMode(8, OUTPUT);
+   pinMode(9, OUTPUT);
    while(1){
     if (xSemaphoreTake(xBinarySemaphore, portMAX_DELAY)){
       if(msg == '1'){
@@ -67,8 +67,12 @@ void TaskAction(void *pvParameters){
       else if(msg == '3'){
         myServo.write(0);
       }
+      else if(msg == '4'){
+        tone(9, 100,8000);
+      }
+      else if(msg == '5'){
+        noTone(9);
+      }
     }
   }
 }
-
-
