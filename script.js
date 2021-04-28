@@ -26,22 +26,22 @@ recognition.onresult = function(event){
     document.getElementById('paragraphText').innerHTML = message;
 
     if(characteristicCache){
-        if(message.toLowerCase() === 'light on' || message.toLowerCase() === 'turn light on'){
+        if(message.toLowerCase() === 'light on' || message.toLowerCase() === 'turn the light on'|| message.toLowerCase() === 'turn on light'|| message.toLowerCase() === 'turn on the light'|| message.toLowerCase() === 'turn on the lights'|| message.toLowerCase() === 'turn light on'){
             characteristicCache.writeValue(new TextEncoder().encode('1'));   
         }
-        else if(message.toLowerCase() === 'light off'|| message.toLowerCase() === 'turn light off'){
+        else if(message.toLowerCase() === 'light off'|| message.toLowerCase() === 'turn the light off'|| message.toLowerCase() === 'turn off light'  || message.toLowerCase() === 'turn off the light' || message.toLowerCase() === 'turn off the lights' || message.toLowerCase() === 'turn the light off'){
             characteristicCache.writeValue(new TextEncoder().encode('0'));   
         }
-        else if(message.toLowerCase() === 'open garage'){
+        else if(message.toLowerCase() === 'open garage' || message.toLowerCase() === 'open the garage'){
             characteristicCache.writeValue(new TextEncoder().encode('2'));   
         }
-        else if(message.toLowerCase() === 'close garage'){
+        else if(message.toLowerCase() === 'close garage'|| message.toLowerCase() === 'close the garage'){
             characteristicCache.writeValue(new TextEncoder().encode('3'));   
         }
-        else if(message.toLowerCase() === 'alarm on' || message.toLowerCase() === 'turn alarm on'){
+        else if(message.toLowerCase() === 'alarm on' || message.toLowerCase() === 'turn alarm on' || message.toLowerCase() === 'turn the alarm on'|| message.toLowerCase() === 'turn on the alarm'){
             characteristicCache.writeValue(new TextEncoder().encode('4'));   
         }
-        else if(message.toLowerCase() === 'alarm off' || message.toLowerCase() === 'turn alarm off'){
+        else if(message.toLowerCase() === 'alarm off' || message.toLowerCase() === 'turn alarm off' || message.toLowerCase() === 'turn the alarm off'|| message.toLowerCase() === 'turn off the alarm'){
             characteristicCache.writeValue(new TextEncoder().encode('5'));   
         }
     }
