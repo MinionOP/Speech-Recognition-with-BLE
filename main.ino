@@ -29,6 +29,9 @@ void setup()
               NULL, 
               0, // Priority
               NULL );
+  
+  vTaskStartScheduler();
+
     
 }
 void loop(){
